@@ -1,32 +1,29 @@
 package org.example.model.Entity;
 
+
 import jakarta.persistence.*;
 import org.example.utils.TableColumnConstants;
 import org.example.utils.TableConstants;
 
 @Entity
-@Table(name = TableConstants.TBL_COURSE)
-public class EntityCourse {
+@Table(name = TableConstants.TBL_SEMESTER)
+public class EntitySemester {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = TableColumnConstants.ID)
     private int id;
-
     @Column(name = TableColumnConstants.TITLE)
     private String title;
-    @Column(name = TableColumnConstants.CREDITS)
-    private int credits;
     @Column(name = TableColumnConstants.STATUS)
     private String status;
 
-    public EntityCourse() {
+    public EntitySemester() {
     }
 
-    public EntityCourse(int id, String title, int credits, String status) {
+    public EntitySemester(int id, String title, String status) {
         this.id = id;
         this.title = title;
-        this.credits = credits;
         this.status = status;
     }
 
@@ -44,14 +41,6 @@ public class EntityCourse {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public int getCredits() {
-        return credits;
-    }
-
-    public void setCredits(int credits) {
-        this.credits = credits;
     }
 
     public String getStatus() {

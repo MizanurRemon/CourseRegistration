@@ -1,8 +1,10 @@
 package org.example.dao;
 
+
 import org.example.Handler.Error.ApiRequestException;
 import org.example.model.Entity.EntityCourse;
-import org.example.model.response.CourseResponse;
+import org.example.model.Entity.EntitySemester;
+import org.example.model.response.SemesterResponse;
 import org.example.utils.Constants;
 import org.example.utils.TableColumnConstants;
 import org.example.utils.TableConstants;
@@ -14,11 +16,11 @@ import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class CourseDaoImpl implements CourseDao {
+public class SemesterDaoImpl implements SemesterDao {
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
@@ -27,11 +29,12 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public boolean insertCourse(EntityCourse entityCourse) {
-        String checkQuery = "SELECT * from " + TableConstants.TBL_COURSE + " WHERE title = '" + entityCourse.getTitle() + "'";
-        String query = "INSERT into " + TableConstants.TBL_COURSE + " (" + TableColumnConstants.TITLE + "," + TableColumnConstants.CREDITS + "," + TableColumnConstants.STATUS + ") values(?,?,?)";
-        try {
+    public boolean insertSemester(EntitySemester entitySemester) {
+        String checkQuery = "SELECT * from " + TableConstants.TBL_SEMESTER + " WHERE title = '" + entitySemester.getTitle() + "'";
 
+        String query = "INSERT into " + TableConstants.TBL_SEMESTER + " (" + TableColumnConstants.TITLE + "," + TableColumnConstants.STATUS + ")" +
+                " values (?,?)";
+        try {
             List<Integer> items = jdbcTemplate.query(checkQuery, new RowMapper<Integer>() {
                 @Override
                 public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -42,30 +45,30 @@ public class CourseDaoImpl implements CourseDao {
             if (items.size() > 0) {
                 throw new ApiRequestException(Constants.TITLE_EXIST);
             } else {
-                return jdbcTemplate.update(query, entityCourse.getTitle(), entityCourse.getCredits(), entityCourse.getStatus()) == 1;
+                return jdbcTemplate.update(query, entitySemester.getTitle(), entitySemester.getStatus()) == 1;
 
             }
-
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }
     }
 
     @Override
-    public List<CourseResponse> getCourses() {
-        String query = "SELECT * from " + TableConstants.TBL_COURSE+" WHERE status = 'active'" +
-                " ORDER BY id ASC";
-        try {
-            return jdbcTemplate.query(query, new RowMapper<CourseResponse>() {
-                @Override
-                public CourseResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
-                    CourseResponse course = new CourseResponse();
-                    course.id = rs.getInt(TableColumnConstants.ID);
-                    course.title = rs.getString(TableColumnConstants.TITLE);
-                    course.credits = rs.getInt(TableColumnConstants.CREDITS);
-                    course.status = rs.getString(TableColumnConstants.STATUS);
+    public List<SemesterResponse> getSemester() {
+        String query = "SELECT * from " + TableConstants.TBL_SEMESTER+
+                " WHERE status = 'active'" +
+                " ORDER BY title ASC";
 
-                    return course;
+        try {
+            return jdbcTemplate.query(query, new RowMapper<SemesterResponse>() {
+                @Override
+                public SemesterResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    SemesterResponse response = new SemesterResponse();
+                    response.id = rs.getInt(TableColumnConstants.ID);
+                    response.title = rs.getString(TableColumnConstants.TITLE);
+                    response.status = rs.getString(TableColumnConstants.STATUS);
+
+                    return response;
                 }
             });
         } catch (Exception e) {
@@ -74,20 +77,20 @@ public class CourseDaoImpl implements CourseDao {
     }
 
     @Override
-    public boolean updateCourseStatus(EntityCourse entityCourse) {
-        String query = "UPDATE " + TableConstants.TBL_COURSE +
+    public boolean updateSemesterStatus(EntitySemester semester) {
+        String query = "UPDATE " + TableConstants.TBL_SEMESTER +
                 " SET status = ? WHERE id = ?";
 
         try {
-            return jdbcTemplate.update(query, entityCourse.getStatus(), entityCourse.getId()) == 1;
+            return jdbcTemplate.update(query, semester.getStatus(), semester.getId()) == 1;
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }
     }
 
     @Override
-    public boolean deleteCourse(int id) {
-        String query = "UPDATE " + TableConstants.TBL_COURSE +
+    public boolean deleteSemester(int id) {
+        String query = "UPDATE " + TableConstants.TBL_SEMESTER +
                 " SET status = ? WHERE id = ?";
         try {
             return jdbcTemplate.update(query, "delete", id) == 1;

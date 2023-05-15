@@ -1,2 +1,18 @@
-package org.example.utils;public class UrlConstants {
+package org.example.utils;
+
+public class UrlConstants {
+    public static final String REQUEST_MAPPING = "/api";
+
+
+    //course
+    public static final String ADD_COURSE = "/add_course";
+    public static final String COURSES = "/courses";
+    public static final String UPDATE_COURSE_STATUS = "/update_course_status";
+    public static final String COURSE_DELETE = "/course_delete";
+
+    //semester
+    public static final String ADD_SEMESTER = "/add_semester";
+    public static final String GET_SEMESTER = "/get_semester";
+    public static final String UPDATE_SEMESTER_STATUS = "/update_semester_status";
+    public static final String SEMESTER_DELETE = "/semester_delete";
 }
