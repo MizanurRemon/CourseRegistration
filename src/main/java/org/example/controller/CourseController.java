@@ -27,16 +27,16 @@ public class CourseController {
 
         try {
             if (entityCourse.getTitle().isEmpty() || entityCourse.getStatus().isEmpty() || entityCourse.getCredits() == 0) {
-                throw new ApiRequestException("empty parameter");
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
             } else {
                 LinkedHashMap<String, Object> body = new LinkedHashMap<>(); //hashmap sort its keys, but LinkedHashMap maintain its default order
-                body.put("statusCode", HttpStatus.OK.value());
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
 
 
                 if (courseService.insertCourse(entityCourse)) {
-                    body.put("message", Constants.INSERT_SUCCESSFULLY);
+                    body.put(Constants.MESSAGE, Constants.INSERT_SUCCESSFULLY);
                 } else {
-                    body.put("message", Constants.FAILED);
+                    body.put(Constants.MESSAGE, Constants.FAILED);
                 }
 
                 return ResponseEntity.ok(body);
@@ -50,8 +50,8 @@ public class CourseController {
     public ResponseEntity<?> getCourses() {
         try {
             LinkedHashMap<String, Object> body = new LinkedHashMap<>(); //hashmap sort its keys, but LinkedHashMap maintain its default order
-            body.put("statusCode", HttpStatus.OK.value());
-            body.put("data", courseService.getCourses());
+            body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+            body.put(Constants.DATA, courseService.getCourses());
 
             return ResponseEntity.ok(body);
         } catch (Exception e) {
@@ -63,15 +63,15 @@ public class CourseController {
     public ResponseEntity<?> updateCourseStatus(EntityCourse entityCourse){
         try {
             if(entityCourse.getId() == 0 || entityCourse.getStatus().isEmpty()){
-                throw new ApiRequestException("empty parameter");
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
             }else {
                 LinkedHashMap<String, Object> body = new LinkedHashMap<>();
-                body.put("statusCode", HttpStatus.OK.value());
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
 
                 if (courseService.updateCourseStatus(entityCourse)){
-                    body.put("message", Constants.UPDATE_SUCCESSFULLY);
+                    body.put(Constants.MESSAGE, Constants.UPDATE_SUCCESSFULLY);
                 } else {
-                    body.put("message", Constants.FAILED);
+                    body.put(Constants.MESSAGE, Constants.FAILED);
                 }
 
                 return ResponseEntity.ok(body);
@@ -85,15 +85,15 @@ public class CourseController {
     public ResponseEntity<?> updateCourseStatus(int id){
         try {
             if(id == 0){
-                throw new ApiRequestException("empty parameter");
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
             }else {
                 LinkedHashMap<String, Object> body = new LinkedHashMap<>();
-                body.put("statusCode", HttpStatus.OK.value());
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
 
                 if (courseService.deleteCourse(id)){
-                    body.put("message", Constants.DELETE_SUCCESSFULLY);
+                    body.put(Constants.MESSAGE, Constants.DELETE_SUCCESSFULLY);
                 } else {
-                    body.put("message", Constants.FAILED);
+                    body.put(Constants.MESSAGE, Constants.FAILED);
                 }
 
                 return ResponseEntity.ok(body);

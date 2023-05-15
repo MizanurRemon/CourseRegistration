@@ -2,6 +2,7 @@ package org.example.controller;
 
 
 import org.example.Handler.Error.ApiRequestException;
+import org.example.utils.Constants;
 import org.example.utils.UrlConstants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,8 @@ public class TestController {
 
         try {
             LinkedHashMap<String, Object> body = new LinkedHashMap<>(); //hashmap sort its keys, but LinkedHashMap maintain its default order
-            body.put("statusCode", HttpStatus.OK.value());
-            body.put("message", "Server Running");
+            body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+            body.put(Constants.MESSAGE, "Server Running");
             return ResponseEntity.ok(body);
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());

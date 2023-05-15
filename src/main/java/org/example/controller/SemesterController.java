@@ -25,7 +25,7 @@ public class SemesterController {
     public ResponseEntity<?> insertSemester(EntitySemester semester) {
         try {
             if (semester.getTitle().isEmpty() || semester.getStatus().isEmpty()) {
-                throw new ApiRequestException("empty parameter");
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
             } else {
                 LinkedHashMap<String, Object> body = new LinkedHashMap<>();
                 body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
@@ -61,7 +61,7 @@ public class SemesterController {
 
         try {
             if (semester.getId() == 0 || semester.getStatus().isEmpty()) {
-                throw new ApiRequestException("empty parameter");
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
             } else {
                 LinkedHashMap<String, Object> body = new LinkedHashMap<>();
                 body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
