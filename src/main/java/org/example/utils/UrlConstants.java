@@ -20,4 +20,8 @@ public class UrlConstants {
     public static final String GET_STUDENT = "/get_student";
     public static final String UPDATE_STUDENT_IMAGE = "/update_student_image";
     public static final String UPDATE_STUDENT_STATUS = "/update_student_status";
+
+    //course registration
+    public static final String COURSE_REGISTRATION = "/course_registration";
+    public static final String GET_REGISTERED_COURSES = "/get_registered_courses";
 }
