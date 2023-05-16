@@ -1,11 +1,11 @@
-package org.example.services;
+package org.example.dao.semester;
 
 import org.example.model.Entity.EntitySemester;
 import org.example.model.response.SemesterResponse;
 
 import java.util.List;
 
-public interface SemesterService {
+public interface SemesterDao {
     boolean insertSemester(EntitySemester entitySemester);
 
     List<SemesterResponse> getSemester();

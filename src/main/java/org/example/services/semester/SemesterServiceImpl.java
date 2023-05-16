@@ -1,7 +1,7 @@
-package org.example.services;
+package org.example.services.semester;
 
 import jakarta.transaction.Transactional;
-import org.example.dao.SemesterDao;
+import org.example.dao.semester.SemesterDao;
 import org.example.model.Entity.EntitySemester;
 import org.example.model.response.SemesterResponse;
 import org.springframework.beans.factory.annotation.Autowired;

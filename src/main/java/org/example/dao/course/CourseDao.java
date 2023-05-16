@@ -1,4 +1,4 @@
-package org.example.dao;
+package org.example.dao.course;
 
 import org.example.model.Entity.EntityCourse;
 import org.example.model.response.CourseResponse;

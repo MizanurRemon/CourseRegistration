@@ -3,7 +3,7 @@ package org.example.controller;
 
 import org.example.Handler.Error.ApiRequestException;
 import org.example.model.Entity.EntitySemester;
-import org.example.services.SemesterService;
+import org.example.services.semester.SemesterService;
 import org.example.utils.Constants;
 import org.example.utils.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;

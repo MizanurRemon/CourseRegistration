@@ -3,7 +3,6 @@ package org.example.utils;
 public class UrlConstants {
     public static final String REQUEST_MAPPING = "/api";
 
-
     //course
     public static final String ADD_COURSE = "/add_course";
     public static final String COURSES = "/courses";
@@ -15,4 +14,10 @@ public class UrlConstants {
     public static final String GET_SEMESTER = "/get_semester";
     public static final String UPDATE_SEMESTER_STATUS = "/update_semester_status";
     public static final String SEMESTER_DELETE = "/semester_delete";
+
+    //student
+    public static final String ADD_STUDENT = "/add_student";
+    public static final String GET_STUDENT = "/get_student";
+    public static final String UPDATE_STUDENT_IMAGE = "/update_student_image";
+    public static final String UPDATE_STUDENT_STATUS = "/update_student_status";
 }

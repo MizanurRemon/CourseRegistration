@@ -1,7 +1,7 @@
-package org.example.services;
+package org.example.services.course;
 
 import jakarta.transaction.Transactional;
-import org.example.dao.CourseDao;
+import org.example.dao.course.CourseDao;
 import org.example.model.Entity.EntityCourse;
 import org.example.model.response.CourseResponse;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package org.example.services;
+package org.example.services.course;
 
 import org.example.model.Entity.EntityCourse;
 import org.example.model.response.CourseResponse;
