@@ -119,7 +119,7 @@ public class StudentController {
                 return ResponseEntity.ok(body);
         }
         } catch (Exception e) {
-            throw new ApiRequestException("hi");
+            throw new ApiRequestException(e.getMessage());
         }
     }
 }
