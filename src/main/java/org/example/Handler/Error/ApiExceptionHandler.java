@@ -11,7 +11,7 @@ public class ApiExceptionHandler {
     @ExceptionHandler(value = {ApiRequestException.class})
     public ResponseEntity<Object> apiRequestException(ApiRequestException e) {
 
-        int statusCode = HttpStatus.OK.value();
+        int statusCode = HttpStatus.BAD_REQUEST.value();
         ErrorItem errorItem = new ErrorItem(
                 statusCode,
                 e.getMessage()

@@ -44,7 +44,7 @@ public class CourseRegistrationDaoImpl implements CourseRegistrationDao {
     public List<CourseRegistrationResponse> getRegisteredCourse() {
         String query = "SELECT ac.id as id, ac.status as status, ac.created_at as created_at, ac.updated_at as updated_at, " +
                 "c.id as course_id, c.title as c_title,c.credits as c_credits, c.status as c_status, " +
-                "s.id as s_id, s.name as s_name, s.phone as s_phone, s.roll_no as s_roll_no, " +
+                "s.id as s_id, s.name as s_name, s.phone as s_phone, s.roll_no as s_roll_no, s.status as s_status, " +
                 "sem.id as sem_id, sem.title as sem_title, sem.status as sem_status " +
                 "from registered_courses ac " +
                 "LEFT JOIN courses c " +
@@ -80,6 +80,7 @@ public class CourseRegistrationDaoImpl implements CourseRegistrationDao {
                     studentResponse.name = rs.getString("s_name");
                     studentResponse.phone = rs.getString("s_phone");
                     studentResponse.roll_no = rs.getString("s_roll_no");
+                    studentResponse.status = rs.getString("s_status");
 
                     response.course = courseResponse;
                     response.semester = semesterResponse;

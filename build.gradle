@@ -28,6 +28,18 @@ dependencies {
     implementation 'io.jsonwebtoken:jjwt-api:0.11.1'
     implementation 'io.jsonwebtoken:jjwt-impl:0.11.1'
     implementation 'io.jsonwebtoken:jjwt-jackson:0.11.1'
+
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+    //implementation group: 'com.c4-soft.springaddons', name: 'spring-security-oauth2-addons', version: '4.5.0'
+
 }
 
 test {

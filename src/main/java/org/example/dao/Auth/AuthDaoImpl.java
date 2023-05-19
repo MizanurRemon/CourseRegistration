@@ -2,6 +2,8 @@ package org.example.dao.Auth;
 
 
 import org.example.Handler.Error.ApiRequestException;
+import org.example.configuration.JwtTokenProvider;
+import org.example.helpers.Helpers;
 import org.example.helpers.JwtAuth;
 import org.example.model.response.AuthResponse;
 import org.example.utils.TableColumnConstants;
@@ -29,11 +31,11 @@ public class AuthDaoImpl implements AuthDao {
     @Override
     public AuthResponse studentLogin(String roll) {
 
-        String checkRoll = "SELECT id from " + TableConstants.TBL_STUDENT + " WHERE roll_no = ?";
+        String checkRoll = "SELECT * from " + TableConstants.TBL_STUDENT + " WHERE roll_no = '" + roll + "'";
 
         try {
 
-            if (jdbcTemplate.queryForObject(checkRoll, Integer.class, roll) != 0) {
+           /* if (jdbcTemplate.queryForObject(checkRoll, Integer.class, roll) != 0) {
 
                 int s_id = jdbcTemplate.queryForObject(checkRoll, Integer.class, roll);
                 String checkAuth = "SELECT COUNT(id) from " + TableConstants.TBL_AUTH + " WHERE student_id = ?";
@@ -85,7 +87,20 @@ public class AuthDaoImpl implements AuthDao {
 
             } else {
                 throw new ApiRequestException("roll not found");
-            }
+            }*/
+
+            return jdbcTemplate.queryForObject(checkRoll, new RowMapper<AuthResponse>() {
+
+                @Override
+                public AuthResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+                    AuthResponse response = new AuthResponse();
+                    response.id = rs.getInt(TableColumnConstants.ID);
+//                    response.token = JwtAuth.convertIntoJwt(roll);
+                    response.token = JwtTokenProvider.generateToken(roll);
+                    return response;
+                }
+            });
 
 
         } catch (Exception e) {
