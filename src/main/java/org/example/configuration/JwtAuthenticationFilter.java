@@ -4,37 +4,156 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.Handler.Error.ApiRequestException;
+import org.example.model.response.AuthResponse;
 import org.example.services.Auth.AuthService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
+import java.nio.file.AccessDeniedException;
+import java.util.Collection;
 
+
+@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private JwtTokenProvider tokenProvider;
-    private AuthService authService;
 
-    public JwtAuthenticationFilter(JwtTokenProvider tokenProvider, AuthService authService) {
-        this.tokenProvider = tokenProvider;
-        this.authService = authService;
-    }
+    @Autowired
+    private JwtTokenProvider tokenProvider;
+    @Autowired
+    private AuthService service;
+    @Autowired
+    private HandlerExceptionResolver handlerExceptionResolver;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
         //get jwt token from http request
-        String token = getTokenFromRequest(request);
-    }
+        String authorizationHeader = httpServletRequest.getHeader("Authorization");
+        //System.out.println("header:: " + authorizationHeader);
 
-    private String getTokenFromRequest(HttpServletRequest request) {
+        String token = null;
+        String roll = null;
 
-        String bearerToken = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            token = authorizationHeader.substring(7);
+            roll = JwtTokenProvider.decodeRoll(token);
+        } else {
 
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){
-            return bearerToken.substring(7, bearerToken.length());
+            AccessDeniedException e = new AccessDeniedException("bearer missing");
+            handlerExceptionResolver.resolveException(httpServletRequest, httpServletResponse, null, e);
+            filterChain.doFilter(httpServletRequest, httpServletResponse);
+            return;
         }
 
-        return null;
+//        if (roll != null) {
+//            AuthResponse response = service.studentLogin(roll);
+//            UserDetails userDetails = new UserDetails() {
+//                @Override
+//                public Collection<? extends GrantedAuthority> getAuthorities() {
+//                    return null;
+//                }
+//
+//                @Override
+//                public String getPassword() {
+//                    return null;
+//                }
+//
+//                @Override
+//                public String getUsername() {
+//                    return response.roll_no;
+//                }
+//
+//                @Override
+//                public boolean isAccountNonExpired() {
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean isAccountNonLocked() {
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean isCredentialsNonExpired() {
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean isEnabled() {
+//                    return false;
+//                }
+//            };
+//
+//            if (!JwtTokenProvider.checkExpiration(token) && JwtTokenProvider.validateToken(token)) {
+//                //System.out.println("un: " + userDetails.getUsername());
+//                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+//                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+//                usernamePasswordAuthenticationToken
+//                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+//                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+//            }
+//        } else {
+//            //System.out.println("error");
+//        }
+
+        AuthResponse response = service.studentLogin(roll);
+        UserDetails userDetails = new UserDetails() {
+            @Override
+            public Collection<? extends GrantedAuthority> getAuthorities() {
+                return null;
+            }
+
+            @Override
+            public String getPassword() {
+                return null;
+            }
+
+            @Override
+            public String getUsername() {
+                return response.roll_no;
+            }
+
+            @Override
+            public boolean isAccountNonExpired() {
+                return false;
+            }
+
+            @Override
+            public boolean isAccountNonLocked() {
+                return false;
+            }
+
+            @Override
+            public boolean isCredentialsNonExpired() {
+                return false;
+            }
+
+            @Override
+            public boolean isEnabled() {
+                return false;
+            }
+        };
+
+        if (!JwtTokenProvider.checkExpiration(token) && JwtTokenProvider.validateToken(token)) {
+            //System.out.println("un: " + userDetails.getUsername());
+            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                    new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            usernamePasswordAuthenticationToken
+                    .setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+        }
+
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
+
 }

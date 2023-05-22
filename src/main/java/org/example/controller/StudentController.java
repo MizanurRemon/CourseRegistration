@@ -11,13 +11,14 @@ import org.example.utils.UrlConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.LinkedHashMap;
-
+@CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping(UrlConstants.REQUEST_MAPPING)
 public class StudentController {
@@ -117,9 +118,28 @@ public class StudentController {
                 }
 
                 return ResponseEntity.ok(body);
-        }
+            }
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }
     }
+
+    @PostMapping(UrlConstants.STUDENT_INFO)
+    public ResponseEntity<?> getUserByID(int id) {
+        try {
+            if (id != 0) {
+                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+                body.put(Constants.DATA, service.getStudentByID(id));
+
+                return ResponseEntity.ok(body);
+            } else {
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
+
+            }
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
 }

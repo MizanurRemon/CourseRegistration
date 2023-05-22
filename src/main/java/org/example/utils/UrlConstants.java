@@ -2,6 +2,7 @@ package org.example.utils;
 
 public class UrlConstants {
     public static final String REQUEST_MAPPING = "/api";
+    public static final String REQUEST_AUTH = "/auth";
 
     //course
     public static final String ADD_COURSE = "/add_course";
@@ -26,4 +27,5 @@ public class UrlConstants {
     public static final String GET_REGISTERED_COURSES = "/get_registered_courses";
 
     public static final String STUDENT_LOGIN = "/student_login";
+    public static final String STUDENT_INFO = "/student_info";
 }

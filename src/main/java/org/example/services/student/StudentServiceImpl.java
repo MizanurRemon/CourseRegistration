@@ -36,4 +36,9 @@ public class StudentServiceImpl implements StudentService {
     public boolean updateImage(EntityStudent student) {
         return dao.updateImage(student);
     }
+
+    @Override
+    public StudentResponse getStudentByID(int id) {
+        return dao.getStudentByID(id);
+    }
 }

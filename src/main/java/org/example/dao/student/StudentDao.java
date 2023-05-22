@@ -14,4 +14,5 @@ public interface StudentDao {
 
     boolean updateImage(EntityStudent student);
 
+    StudentResponse getStudentByID(int id);
 }

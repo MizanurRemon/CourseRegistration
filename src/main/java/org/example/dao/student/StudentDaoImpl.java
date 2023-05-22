@@ -107,4 +107,29 @@ public class StudentDaoImpl implements StudentDao {
             throw new ApiRequestException(e.getMessage());
         }
     }
+
+    @Override
+    public StudentResponse getStudentByID(int id) {
+        String query = "SELECT * from student WHERE id = '" + id + "'";
+        try {
+            return jdbcTemplate.queryForObject(query, new RowMapper<StudentResponse>() {
+                @Override
+                public StudentResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    StudentResponse studentResponse = new StudentResponse();
+                    studentResponse.id = rs.getInt(TableColumnConstants.ID);
+                    studentResponse.name = rs.getString(TableColumnConstants.NAME);
+                    studentResponse.phone = rs.getString(TableColumnConstants.PHONE);
+                    studentResponse.roll_no = rs.getString(TableColumnConstants.ROLL_NO);
+                    studentResponse.image = rs.getBytes(TableColumnConstants.IMAGE);
+                    studentResponse.status = rs.getString(TableColumnConstants.STATUS);
+                    studentResponse.created_at = rs.getString(TableColumnConstants.CREATED_AT);
+                    studentResponse.updated_at = rs.getString(TableColumnConstants.UPDATED_AT);
+
+                    return studentResponse;
+                }
+            });
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
 }

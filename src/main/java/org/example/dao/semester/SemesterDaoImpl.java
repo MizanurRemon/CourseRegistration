@@ -55,7 +55,7 @@ public class SemesterDaoImpl implements SemesterDao {
     @Override
     public List<SemesterResponse> getSemester() {
         String query = "SELECT * from " + TableConstants.TBL_SEMESTER+
-                " WHERE status = 'active'" +
+               // " WHERE status = 'active'" +
                 " ORDER BY title ASC";
 
         try {
