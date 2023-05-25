@@ -15,4 +15,5 @@ public class TableColumnConstants {
     public static final String STUDENT_ID = "student_id";
     public static final String COURSE_ID = "course_id";
     public static final String SEMESTER_ID = "semester_id";
+    public static final String USERNAME = "username";
 }

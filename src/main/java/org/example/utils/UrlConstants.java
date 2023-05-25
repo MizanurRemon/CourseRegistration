@@ -28,4 +28,8 @@ public class UrlConstants {
 
     public static final String STUDENT_LOGIN = "/student_login";
     public static final String STUDENT_INFO = "/student_info";
+
+
+    public static final String V2 = "/v2";
+    public static final String ADMIN_LOGIN = "/admin_login";
 }

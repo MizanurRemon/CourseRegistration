@@ -18,6 +18,14 @@ public class SecurityConfiguration {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
+    private static final String[] AUTH_WHITELIST = {
+            "/api/v1/auth/**",
+            "/v3/api-docs/**",
+            "/v3/api-docs.yaml",
+            "/swagger-ui/**",
+            "swagger-ui.html"
+    };
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -25,6 +33,10 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests((authorize) -> {
                     try {
                         authorize.requestMatchers("/auth/**")
+                                .permitAll()
+                                .requestMatchers(AUTH_WHITELIST)
+                                .permitAll()
+                                .requestMatchers("/v2/**")
                                 .permitAll()
                                 .anyRequest()
                                 .authenticated();

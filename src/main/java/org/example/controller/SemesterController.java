@@ -20,27 +20,6 @@ public class SemesterController {
     @Autowired
     SemesterService semesterService;
 
-    @PostMapping(UrlConstants.ADD_SEMESTER)
-    public ResponseEntity<?> insertSemester(EntitySemester semester) {
-        try {
-            if (semester.getTitle().isEmpty() || semester.getStatus().isEmpty()) {
-                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
-            } else {
-                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
-                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
-                if (semesterService.insertSemester(semester)) {
-                    body.put(Constants.MESSAGE, Constants.INSERT_SUCCESSFULLY);
-                } else {
-                    body.put(Constants.MESSAGE, Constants.FAILED);
-                }
-
-                return ResponseEntity.ok(body);
-            }
-        } catch (Exception e) {
-            throw new ApiRequestException(e.getMessage());
-        }
-    }
-
     @GetMapping(UrlConstants.GET_SEMESTER)
     public ResponseEntity<?> getSemester() {
         try {
@@ -54,48 +33,5 @@ public class SemesterController {
         }
     }
 
-
-    @PostMapping(UrlConstants.UPDATE_SEMESTER_STATUS)
-    public ResponseEntity<?> updateSemesterStatus(EntitySemester semester){
-
-        try {
-            if (semester.getId() == 0 || semester.getStatus().isEmpty()) {
-                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
-            } else {
-                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
-                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
-                if (semesterService.updateSemesterStatus(semester)) {
-                    body.put(Constants.MESSAGE, Constants.UPDATE_SUCCESSFULLY);
-                } else {
-                    body.put(Constants.MESSAGE, Constants.FAILED);
-                }
-
-                return ResponseEntity.ok(body);
-            }
-        }catch (Exception e){
-            throw new ApiRequestException(e.getMessage());
-        }
-    }
-
-    @PostMapping(UrlConstants.SEMESTER_DELETE)
-    public ResponseEntity<?> deleteSemester(int id){
-        try {
-            if(id == 0){
-                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
-            }else {
-                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
-                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
-
-                if(semesterService.deleteSemester(id)){
-                    body.put(Constants.MESSAGE, Constants.DELETE_SUCCESSFULLY);
-                }else {
-                    body.put(Constants.MESSAGE, Constants.FAILED);
-                }
-                return ResponseEntity.ok(body);
-            }
-        }catch (Exception e){
-            throw new ApiRequestException(e.getMessage());
-        }
-    }
 
 }

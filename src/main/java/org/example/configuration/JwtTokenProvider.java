@@ -25,7 +25,6 @@ public class JwtTokenProvider {
     public static String generateToken(String roll) {
 
         //String roll = authentication.getName();
-
         Date currentDate = new Date();
         Date expireDate = new Date(currentDate.getTime() + JwtConfig.DURATION);
         String token = Jwts.builder()
@@ -34,6 +33,7 @@ public class JwtTokenProvider {
                 .setExpiration(expireDate)
                 .signWith(key())
                 .compact();
+
 
         return token;
     }
