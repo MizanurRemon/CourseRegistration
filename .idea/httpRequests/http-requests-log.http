@@ -1,0 +1,10 @@
+GET http://localhost:5001/v3/api-docs
+Accept: application/json
+Connection: Keep-Alive
+User-Agent: Apache-HttpClient/4.5.14 (Java/17.0.7)
+Accept-Encoding: br,deflate,gzip,x-gzip
+
+<> 2023-07-19T110842.200.json
+
+###
+

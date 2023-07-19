@@ -1,0 +1,809 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "OpenAPI definition",
+    "version": "v0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:5001",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/v2/update_student_status": {
+      "post": {
+        "tags": [
+          "admin-student-controller"
+        ],
+        "operationId": "updateStudentStatus",
+        "parameters": [
+          {
+            "name": "student",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityStudent"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/update_student_image": {
+      "post": {
+        "tags": [
+          "admin-student-controller"
+        ],
+        "operationId": "updateStudentImage",
+        "parameters": [
+          {
+            "name": "student",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityStudent"
+            }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/update_semester_status": {
+      "post": {
+        "tags": [
+          "admin-semester-controller"
+        ],
+        "operationId": "updateSemesterStatus",
+        "parameters": [
+          {
+            "name": "semester",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntitySemester"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/update_course_status": {
+      "post": {
+        "tags": [
+          "admin-course-controller"
+        ],
+        "operationId": "updateCourseStatus",
+        "parameters": [
+          {
+            "name": "entityCourse",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityCourse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/student_info": {
+      "post": {
+        "tags": [
+          "admin-student-controller"
+        ],
+        "operationId": "getUserByID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/semester_delete": {
+      "post": {
+        "tags": [
+          "admin-semester-controller"
+        ],
+        "operationId": "deleteSemester",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/get_student": {
+      "post": {
+        "tags": [
+          "admin-student-controller"
+        ],
+        "operationId": "getStudent",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/course_delete": {
+      "post": {
+        "tags": [
+          "admin-course-controller"
+        ],
+        "operationId": "updateCourseStatus_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/admin_login": {
+      "post": {
+        "tags": [
+          "admin-controller"
+        ],
+        "operationId": "adminLogin",
+        "parameters": [
+          {
+            "name": "entityAdmin",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityAdmin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/add_student": {
+      "post": {
+        "tags": [
+          "admin-student-controller"
+        ],
+        "operationId": "insertStudent",
+        "parameters": [
+          {
+            "name": "student",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityStudent"
+            }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/add_semester": {
+      "post": {
+        "tags": [
+          "admin-semester-controller"
+        ],
+        "operationId": "insertSemester",
+        "parameters": [
+          {
+            "name": "semester",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntitySemester"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/add_course": {
+      "post": {
+        "tags": [
+          "admin-course-controller"
+        ],
+        "operationId": "insertCourse",
+        "parameters": [
+          {
+            "name": "entityCourse",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityCourse"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/": {
+      "post": {
+        "tags": [
+          "admin-test-controller"
+        ],
+        "operationId": "test",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/student_login": {
+      "post": {
+        "tags": [
+          "auth-controller"
+        ],
+        "operationId": "studentLogin",
+        "parameters": [
+          {
+            "name": "roll",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/update_student_image": {
+      "post": {
+        "tags": [
+          "student-controller"
+        ],
+        "operationId": "updateStudentImage_1",
+        "parameters": [
+          {
+            "name": "student",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityStudent"
+            }
+          },
+          {
+            "name": "file",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/student_info": {
+      "post": {
+        "tags": [
+          "student-controller"
+        ],
+        "operationId": "getUserByID_1",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get_student": {
+      "post": {
+        "tags": [
+          "student-controller"
+        ],
+        "operationId": "getStudent_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/course_registration": {
+      "post": {
+        "tags": [
+          "course-registration-controller"
+        ],
+        "operationId": "courseRegistration",
+        "parameters": [
+          {
+            "name": "courseRegistration",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/EntityCourseRegistration"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/get_semester": {
+      "get": {
+        "tags": [
+          "admin-semester-controller"
+        ],
+        "operationId": "getSemester",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/get_registered_courses": {
+      "get": {
+        "tags": [
+          "admin-course-controller"
+        ],
+        "operationId": "getRegisteredCourses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v2/courses": {
+      "get": {
+        "tags": [
+          "admin-course-controller"
+        ],
+        "operationId": "getCourses",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get_semester": {
+      "get": {
+        "tags": [
+          "semester-controller"
+        ],
+        "operationId": "getSemester_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/get_registered_courses": {
+      "get": {
+        "tags": [
+          "course-registration-controller"
+        ],
+        "operationId": "getRegisteredCourses_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/courses": {
+      "get": {
+        "tags": [
+          "course-controller"
+        ],
+        "operationId": "getCourses_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/": {
+      "get": {
+        "tags": [
+          "test-controller"
+        ],
+        "operationId": "test_1",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "EntityStudent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "image": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "byte"
+            }
+          },
+          "roll_no": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      },
+      "EntitySemester": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityCourse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string"
+          },
+          "credits": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityAdmin": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityCourseRegistration": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "student_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "course_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "semester_id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "status": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
