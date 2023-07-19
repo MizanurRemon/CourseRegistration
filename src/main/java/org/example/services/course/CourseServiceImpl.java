@@ -35,4 +35,9 @@ public class CourseServiceImpl implements CourseService{
     public boolean deleteCourse(int id) {
         return courseDao.deleteCourse(id);
     }
+
+    @Override
+    public List<CourseResponse> getCoursesAdmin() {
+        return courseDao.getCoursesAdmin();
+    }
 }

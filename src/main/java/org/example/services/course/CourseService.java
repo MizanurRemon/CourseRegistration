@@ -11,4 +11,6 @@ public interface CourseService {
     List<CourseResponse> getCourses();
     boolean updateCourseStatus(EntityCourse entityCourse);
     boolean deleteCourse(int id);
+
+    List<CourseResponse> getCoursesAdmin();
 }

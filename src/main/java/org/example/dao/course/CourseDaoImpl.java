@@ -52,7 +52,7 @@ public class CourseDaoImpl implements CourseDao {
 
     @Override
     public List<CourseResponse> getCourses() {
-        String query = "SELECT * from " + TableConstants.TBL_COURSE+" WHERE status = 'active'" +
+        String query = "SELECT * from " + TableConstants.TBL_COURSE + " WHERE status = 'active'" +
                 " ORDER BY id ASC";
         try {
             return jdbcTemplate.query(query, new RowMapper<CourseResponse>() {
@@ -90,6 +90,27 @@ public class CourseDaoImpl implements CourseDao {
                 " SET status = ? WHERE id = ?";
         try {
             return jdbcTemplate.update(query, "delete", id) == 1;
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
+    @Override
+    public List<CourseResponse> getCoursesAdmin() {
+        String query = "SELECT * from " + TableConstants.TBL_COURSE + " ORDER BY id ASC";
+        try {
+            return jdbcTemplate.query(query, new RowMapper<CourseResponse>() {
+                @Override
+                public CourseResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
+                    CourseResponse course = new CourseResponse();
+                    course.id = rs.getInt(TableColumnConstants.ID);
+                    course.title = rs.getString(TableColumnConstants.TITLE);
+                    course.credits = rs.getInt(TableColumnConstants.CREDITS);
+                    course.status = rs.getString(TableColumnConstants.STATUS);
+
+                    return course;
+                }
+            });
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }

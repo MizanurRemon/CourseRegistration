@@ -25,11 +25,11 @@ public class AdminCourseController {
     CourseRegistrationService service;
 
     @GetMapping(UrlConstants.COURSES)
-    public ResponseEntity<?> getCourses() {
+    public ResponseEntity<?> getCoursesAdmin() {
         try {
             LinkedHashMap<String, Object> body = new LinkedHashMap<>(); //hashmap sort its keys, but LinkedHashMap maintain its default order
             body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
-            body.put(Constants.DATA, courseService.getCourses());
+            body.put(Constants.DATA, courseService.getCoursesAdmin());
 
             return ResponseEntity.ok(body);
         } catch (Exception e) {
