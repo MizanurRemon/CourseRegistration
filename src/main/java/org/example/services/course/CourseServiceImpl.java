@@ -12,10 +12,11 @@ import java.util.List;
 
 @Service
 @Transactional
-public class CourseServiceImpl implements CourseService{
+public class CourseServiceImpl implements CourseService {
 
     @Autowired
     CourseDao courseDao;
+
     @Override
     public boolean insertCourse(EntityCourse entityCourse) {
         return courseDao.insertCourse(entityCourse);
@@ -39,5 +40,10 @@ public class CourseServiceImpl implements CourseService{
     @Override
     public List<CourseResponse> getCoursesAdmin() {
         return courseDao.getCoursesAdmin();
+    }
+
+    @Override
+    public boolean updateCourse(EntityCourse course) {
+        return courseDao.updateCourse(course);
     }
 }

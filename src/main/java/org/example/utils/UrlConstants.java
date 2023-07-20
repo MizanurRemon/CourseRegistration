@@ -25,6 +25,7 @@ public class UrlConstants {
     //course registration
     public static final String COURSE_REGISTRATION = "/course_registration";
     public static final String GET_REGISTERED_COURSES = "/get_registered_courses";
+    public static final String UPDATE_COURSE = "/update_course";
 
     public static final String STUDENT_LOGIN = "/student_login";
     public static final String STUDENT_INFO = "/student_info";

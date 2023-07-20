@@ -13,4 +13,6 @@ public interface CourseService {
     boolean deleteCourse(int id);
 
     List<CourseResponse> getCoursesAdmin();
+
+    boolean updateCourse(EntityCourse course);
 }

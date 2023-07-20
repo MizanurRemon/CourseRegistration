@@ -14,4 +14,6 @@ public interface CourseDao {
     boolean deleteCourse(int id);
 
     List<CourseResponse> getCoursesAdmin();
+
+    boolean updateCourse(EntityCourse course);
 }

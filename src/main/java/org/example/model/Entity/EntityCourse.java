@@ -23,6 +23,12 @@ public class EntityCourse {
     public EntityCourse() {
     }
 
+    public EntityCourse(int id, String title, int credits) {
+        this.id = id;
+        this.title = title;
+        this.credits = credits;
+    }
+
     public EntityCourse(int id, String title, int credits, String status) {
         this.id = id;
         this.title = title;

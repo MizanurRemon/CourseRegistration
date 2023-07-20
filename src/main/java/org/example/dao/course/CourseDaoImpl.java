@@ -115,4 +115,15 @@ public class CourseDaoImpl implements CourseDao {
             throw new ApiRequestException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean updateCourse(EntityCourse course) {
+        String query = "UPDATE " + TableConstants.TBL_COURSE +
+                " SET title = ?, credits = ? WHERE id = ?";
+        try {
+            return jdbcTemplate.update(query, course.getTitle(), course.getCredits(), course.getId()) == 1;
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
 }

@@ -106,16 +106,36 @@ public class AdminCourseController {
     }
 
 
-
-
     @GetMapping(UrlConstants.GET_REGISTERED_COURSES)
-    public ResponseEntity<?> getRegisteredCourses(){
+    public ResponseEntity<?> getRegisteredCourses() {
         try {
             LinkedHashMap<String, Object> body = new LinkedHashMap<>();
             body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
             body.put(Constants.DATA, service.getRegisteredCourse());
             return ResponseEntity.ok(body);
-        }catch (Exception e){
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
+    @PostMapping(UrlConstants.UPDATE_COURSE)
+    public ResponseEntity<?> updateCourse(EntityCourse entityCourse) {
+        try {
+            if (entityCourse.getId() == 0 || entityCourse.getTitle().isEmpty() || entityCourse.getCredits() == 0) {
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
+            } else {
+                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+
+                if (courseService.updateCourse(entityCourse)) {
+                    body.put(Constants.MESSAGE, Constants.UPDATE_SUCCESSFULLY);
+                } else {
+                    body.put(Constants.MESSAGE, Constants.FAILED);
+                }
+
+                return ResponseEntity.ok(body);
+            }
+        } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }
     }
