@@ -25,4 +25,9 @@ public class CourseRegistrationServiceImpl implements CourseRegistrationService{
     public List<CourseRegistrationResponse> getRegisteredCourse() {
         return dao.getRegisteredCourse();
     }
+
+    @Override
+    public boolean updateRegisteredCourseStatus(EntityCourseRegistration courseRegistration) {
+        return dao.updateRegisteredCourseStatus(courseRegistration);
+    }
 }

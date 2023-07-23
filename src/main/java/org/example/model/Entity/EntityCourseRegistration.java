@@ -33,6 +33,11 @@ public class EntityCourseRegistration {
     public EntityCourseRegistration() {
     }
 
+    public EntityCourseRegistration(int id, String status) {
+        this.id = id;
+        this.status = status;
+    }
+
     public EntityCourseRegistration(int id, int student_id, int course_id, int semester_id, String status, String created_at) {
         this.id = id;
         this.student_id = student_id;

@@ -115,4 +115,17 @@ public class CourseRegistrationDaoImpl implements CourseRegistrationDao {
             throw new ApiRequestException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean updateRegisteredCourseStatus(EntityCourseRegistration courseRegistration) {
+        //System.out.println("HIT:: "+courseRegistration.getId()+ " "+courseRegistration.getStatus());
+
+        String query = "UPDATE " + TableConstants.TBL_ASSIGNED_COURSES + " SET status = ? WHERE id = ?";
+        try {
+            return jdbcTemplate.update(query, courseRegistration.getStatus(), courseRegistration.getId()) == 1;
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+
+    }
 }

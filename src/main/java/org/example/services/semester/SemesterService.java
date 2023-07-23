@@ -13,4 +13,6 @@ public interface SemesterService {
     boolean updateSemesterStatus(EntitySemester semester);
 
     boolean deleteSemester(int id);
+
+    boolean updateSemester(EntitySemester semester);
 }

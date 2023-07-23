@@ -2,6 +2,7 @@ package org.example.AdminController;
 
 import org.example.Handler.Error.ApiRequestException;
 import org.example.model.Entity.EntityCourse;
+import org.example.model.Entity.EntityCourseRegistration;
 import org.example.services.course.CourseService;
 import org.example.services.course_registration.CourseRegistrationService;
 import org.example.utils.Constants;
@@ -135,6 +136,31 @@ public class AdminCourseController {
 
                 return ResponseEntity.ok(body);
             }
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
+    @PostMapping(UrlConstants.UPDATE_REGISTERED_COURSE_STATUS)
+    public ResponseEntity<?> updateRegisteredCourseStatus(EntityCourseRegistration courseRegistration) {
+
+        //System.out.println(courseRegistration.getId()+ " "+courseRegistration.getStatus());
+        try {
+            if (courseRegistration.getId() == 0 || courseRegistration.getStatus().isEmpty()) {
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
+            } else {
+                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+
+                if (service.updateRegisteredCourseStatus(courseRegistration)) {
+                    body.put(Constants.MESSAGE, Constants.UPDATE_SUCCESSFULLY);
+                } else {
+                    body.put(Constants.MESSAGE, Constants.FAILED);
+                }
+
+                return ResponseEntity.ok(body);
+            }
+
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }

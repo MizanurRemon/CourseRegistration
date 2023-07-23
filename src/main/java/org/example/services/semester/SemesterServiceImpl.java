@@ -33,4 +33,9 @@ public class SemesterServiceImpl implements SemesterService{
     public boolean deleteSemester(int id) {
         return dao.deleteSemester(id);
     }
+
+    @Override
+    public boolean updateSemester(EntitySemester semester) {
+        return dao.updateSemester(semester);
+    }
 }

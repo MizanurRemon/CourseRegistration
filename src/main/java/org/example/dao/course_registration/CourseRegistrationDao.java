@@ -9,4 +9,6 @@ public interface CourseRegistrationDao {
     boolean courseRegistration(EntityCourseRegistration courseRegistration);
 
     List<CourseRegistrationResponse> getRegisteredCourse();
+
+    boolean updateRegisteredCourseStatus(EntityCourseRegistration courseRegistration);
 }

@@ -54,8 +54,8 @@ public class SemesterDaoImpl implements SemesterDao {
 
     @Override
     public List<SemesterResponse> getSemester() {
-        String query = "SELECT * from " + TableConstants.TBL_SEMESTER+
-               // " WHERE status = 'active'" +
+        String query = "SELECT * from " + TableConstants.TBL_SEMESTER +
+                // " WHERE status = 'active'" +
                 " ORDER BY title ASC";
 
         try {
@@ -93,6 +93,19 @@ public class SemesterDaoImpl implements SemesterDao {
                 " SET status = ? WHERE id = ?";
         try {
             return jdbcTemplate.update(query, "delete", id) == 1;
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
+    @Override
+    public boolean updateSemester(EntitySemester semester) {
+
+        String query = "UPDATE " + TableConstants.TBL_SEMESTER + " SET title = ? WHERE id = ?";
+        try {
+
+            return jdbcTemplate.update(query, semester.getTitle(), semester.getId()) == 1;
+
         } catch (Exception e) {
             throw new ApiRequestException(e.getMessage());
         }

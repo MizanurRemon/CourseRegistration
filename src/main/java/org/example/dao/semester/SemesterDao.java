@@ -13,4 +13,6 @@ public interface SemesterDao {
     boolean updateSemesterStatus(EntitySemester semester);
 
     boolean deleteSemester(int id);
+
+    boolean updateSemester(EntitySemester semester);
 }

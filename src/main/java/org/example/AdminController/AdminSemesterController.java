@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.LinkedHashMap;
+
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
 @RequestMapping(UrlConstants.V2)
@@ -90,6 +91,28 @@ public class AdminSemesterController {
                 } else {
                     body.put(Constants.MESSAGE, Constants.FAILED);
                 }
+                return ResponseEntity.ok(body);
+            }
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
+    @PostMapping(UrlConstants.UPDATE_SEMESTER)
+    ResponseEntity<?> updateSemester(EntitySemester semester) {
+        try {
+            if (semester.getId() == 0 || semester.getTitle().isEmpty()) {
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
+            } else {
+                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+
+                if (semesterService.updateSemester(semester)) {
+                    body.put(Constants.MESSAGE, Constants.UPDATE_SUCCESSFULLY);
+                } else {
+                    body.put(Constants.MESSAGE, Constants.FAILED);
+                }
+
                 return ResponseEntity.ok(body);
             }
         } catch (Exception e) {
