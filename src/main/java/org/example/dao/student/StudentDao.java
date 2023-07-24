@@ -8,11 +8,9 @@ import java.util.List;
 public interface StudentDao {
 
     boolean insertStudent(EntityStudent student);
-
     List<StudentResponse> getStudents();
     boolean updateStudentStatus(EntityStudent student);
-
     boolean updateImage(EntityStudent student);
-
     StudentResponse getStudentByID(int id);
+    boolean updateStudentDetails(EntityStudent student);
 }

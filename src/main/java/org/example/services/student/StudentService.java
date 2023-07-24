@@ -12,4 +12,5 @@ public interface StudentService {
     boolean updateStudentStatus(EntityStudent student);
     boolean updateImage(EntityStudent student);
     StudentResponse getStudentByID(int id);
+    boolean updateStudentDetails(EntityStudent student);
 }

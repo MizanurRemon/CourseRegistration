@@ -132,4 +132,14 @@ public class StudentDaoImpl implements StudentDao {
             throw new ApiRequestException(e.getMessage());
         }
     }
+
+    @Override
+    public boolean updateStudentDetails(EntityStudent student) {
+        String query = "UPDATE " + TableConstants.TBL_STUDENT + " SET name = ? WHERE id = ?";
+        try {
+            return jdbcTemplate.update(query, student.getName(), student.getId()) == 1;
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
 }

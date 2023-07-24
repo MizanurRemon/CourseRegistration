@@ -139,4 +139,28 @@ public class AdminStudentController {
             throw new ApiRequestException(e.getMessage());
         }
     }
+
+    @PostMapping(UrlConstants.UPDATE_STUDENT_DETAILS)
+    public ResponseEntity<?> updateStudentDetails(EntityStudent student){
+        try {
+            if (student.getId() == 0 || student.getName().isEmpty()) {
+                throw new ApiRequestException(Constants.EMPTY_PARAMETER);
+            } else {
+                LinkedHashMap<String, Object> body = new LinkedHashMap<>();
+                body.put(Constants.STATUS_CODE, HttpStatus.OK.value());
+
+                if (service.updateStudentDetails(student)) {
+                    body.put(Constants.MESSAGE, Constants.UPDATE_SUCCESSFULLY);
+                } else {
+                    body.put(Constants.MESSAGE, Constants.FAILED);
+                }
+
+                return ResponseEntity.ok(body);
+            }
+        } catch (Exception e) {
+            throw new ApiRequestException(e.getMessage());
+        }
+    }
+
+
 }
